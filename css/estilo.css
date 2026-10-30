@@ -1,0 +1,351 @@
+/* =========================================================
+   CARREIRA JOVEM - estilo.css
+   Arquivo unico de estilo, usado nas 4 paginas do site
+   ========================================================= */
+
+/* ---- variaveis de cor e espacamento ---- */
+:root {
+  --cor-principal: #2c5f8a;
+  --cor-destaque: #f0a500;
+  --cor-fundo: #ffffff;
+  --cor-fundo-alt: #f4f4f4;
+  --cor-texto: #222222;
+  --cor-texto-claro: #666666;
+  --cor-borda: #dddddd;
+  --espaco: 20px;
+}
+
+/* ---- reset simples ---- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1, h2, h3 {
+  color: var(--cor-principal);
+  margin-bottom: 10px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ---- foco visivel (acessibilidade / navegacao por teclado) ---- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--cor-destaque);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   CABECALHO E MENU -> FLEXBOX (situacao 1)
+   ========================================================= */
+.cabecalho {
+  background-color: var(--cor-principal);
+  padding: 15px 0;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo {
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.menu ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.menu a {
+  color: #ffffff;
+}
+
+.menu a:hover,
+.menu a.ativo {
+  text-decoration: underline;
+}
+
+/* ---- media query: empilha o menu em telas pequenas ---- */
+@media (max-width: 700px) {
+  .menu {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .menu ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* =========================================================
+   HERO (topo da pagina inicial)
+   ========================================================= */
+.hero {
+  background-color: var(--cor-fundo-alt);
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 1.8rem;
+}
+
+.hero p {
+  color: var(--cor-texto-claro);
+  max-width: 500px;
+  margin: 10px auto 20px auto;
+}
+
+.botao {
+  display: inline-block;
+  background-color: var(--cor-destaque);
+  color: #222222;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.botao:hover {
+  transform: scale(1.05);
+}
+
+/* =========================================================
+   SECOES GERAIS
+   ========================================================= */
+.secao {
+  padding: 40px 20px;
+}
+
+.secao h2 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.secao-subtitulo {
+  text-align: center;
+  color: var(--cor-texto-claro);
+  margin-bottom: 30px;
+}
+
+/* =========================================================
+   GRID DE CARDS -> CSS GRID (situacao 1, com auto-fit e minmax)
+   ========================================================= */
+.grid-cards {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* ---- card reutilizavel ---- */
+.card {
+  position: relative; /* o badge (position:absolute) usa este elemento como referencia */
+  background-color: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.card-corpo {
+  padding: 15px;
+}
+
+.card-categoria {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--cor-principal);
+}
+
+.card-titulo {
+  font-size: 1.05rem;
+  margin: 5px 0;
+}
+
+.card-desc {
+  color: var(--cor-texto-claro);
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.card-link {
+  font-weight: bold;
+  color: var(--cor-principal);
+}
+
+.card-link:hover {
+  color: var(--cor-destaque);
+}
+
+/* ---- badge -> position:relative no card (pai) + position:absolute no badge (filho) ---- */
+.badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--cor-destaque);
+  color: #222222;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+/* =========================================================
+   PAGINA SOBRE -> GRID (situacao 2, duas colunas no desktop)
+   ========================================================= */
+.sobre-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.caixa-info {
+  background-color: var(--cor-fundo-alt);
+  border: 1px solid var(--cor-borda);
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 700px) {
+  .sobre-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   FORMULARIO (pagina contato)
+   ========================================================= */
+.form-caixa {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: var(--cor-fundo-alt);
+  border: 1px solid var(--cor-borda);
+  border-radius: 6px;
+  padding: 25px;
+}
+
+.campo {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.campo label {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 8px 10px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 4px;
+}
+
+.campo-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.campo-checkbox input {
+  width: auto;
+}
+
+/* =========================================================
+   RODAPE -> FLEXBOX (situacao 2)
+   ========================================================= */
+.rodape {
+  background-color: var(--cor-principal);
+  color: #ffffff;
+  padding: 25px 20px;
+  margin-top: 30px;
+}
+
+.rodape-conteudo {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.rodape a {
+  color: #ffffff;
+}
+
+.rodape a:hover {
+  color: var(--cor-destaque);
+}
+
+.rodape-links {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.rodape-copy {
+  text-align: center;
+  font-size: 0.8rem;
+  margin-top: 20px;
+  color: #dddddd;
+}
